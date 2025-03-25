@@ -1,0 +1,42 @@
+// =============================================
+//              Nav                    
+// ============================================= 
+
+.nav {
+    @include flexbox($dir: column);
+    flex-basis: 100%;
+
+    @include elem(link) {
+        @extend %nav-item-horz;
+
+        a {
+            @extend %nav-item-link;
+
+            &:hover {
+                @extend %nav-item-on;
+            }
+        }
+
+        @include modi(current) {
+            @extend %nav-item-horz;
+
+            a {
+                @extend %nav-item-link;
+                @extend %nav-item-on;
+            }
+        }
+    }
+
+    @include mq(tablet) {
+        @include flexbox(flex, row, flex-end, center);
+        margin: em(10px) 0;
+
+        @include elem(link) {
+            margin-left: em(30px);
+
+            @include modi(current) {
+                margin-left: em(30px);
+            }
+        }
+    }
+}

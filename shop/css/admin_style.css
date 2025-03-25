@@ -1,0 +1,641 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,300i,400,700");
+:root{
+   --main-color:#2980b9;
+   --orange:#f39c12;
+   --red:#e74c3c;
+   --black:#444;
+   --white:#fff;
+   --light-color:#777;
+   --light-bg:#f5f5f5;
+   --border:.2rem solid var(--black);
+   --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
+}
+
+*{
+   font-family: 'Raleway', sans-serif;
+   margin:0; padding:0;
+   box-sizing: border-box;
+   outline: none; border:none;
+   text-decoration: none;
+}
+
+*::selection{
+   background-color: var(--main-color);
+   color:var(--white);
+}
+
+::-webkit-scrollbar{
+   height: .5rem;
+   width: 1rem;
+}
+
+::-webkit-scrollbar-track{
+   background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb{
+   background-color: var(--main-color);
+}
+
+html{
+   font-size: 62.5%;
+   overflow-x: hidden;
+}
+
+body{
+   background-color: var(--light-bg);
+   
+}
+
+section{
+   padding:2rem;
+   max-width: 1200px;
+   margin:0 auto;
+}
+
+.heading{
+   font-size: 4rem;
+   color:var(--black);
+   margin-bottom: 2rem;
+   text-align: center;
+   text-transform: uppercase;
+}
+
+.btn,
+.delete-btn,
+.option-btn{
+   display: block;
+   width: 100%;
+   margin-top: 1rem;
+   border-radius: .5rem;
+   padding:1rem 3rem;
+   font-size: 1.7rem;
+   text-transform: capitalize;
+   color:var(--white);
+   cursor: pointer;
+   text-align: center;
+}
+
+.btn:hover,
+.delete-btn:hover,
+.option-btn:hover{
+   background-color: var(--black);
+}
+
+.btn{
+   background-color: var(--main-color);
+}
+
+.option-btn{
+   background-color: var(--orange);
+}
+
+.delete-btn{
+   background-color: var(--red);
+}
+
+.flex-btn{
+   display: flex;
+   gap:1rem;
+}
+
+.message{
+   position: sticky;
+   top:0;
+   max-width: 1200px;
+   margin:0 auto;
+   background-color: var(--light-bg);
+   padding:2rem;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap:1.5rem;
+   z-index: 1100;
+}
+
+.message span{
+   font-size: 2rem;
+   color:var(--black);
+}
+
+.message i{
+   cursor: pointer;
+   color:var(--red);
+   font-size: 2.5rem;
+}
+
+.message i:hover{
+   color:var(--black);
+}
+
+.empty{
+   padding:1.5rem;
+   background-color: var(--white);
+   border: var(--border);
+   box-shadow: var(--box-shadow);
+   text-align: center;
+   color:var(--red);
+   border-radius: .5rem;
+   font-size: 2rem;
+   text-transform: capitalize;
+}
+
+@keyframes fadeIn{
+   0%{
+      transform: translateY(1rem);
+   }
+}
+
+.form-container{
+   min-height: 100vh;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.form-container form{
+   padding:2rem;
+   text-align: center;
+   box-shadow: var(--box-shadow);
+   background-color: var(--white);
+   border-radius: .5rem;
+   width: 50rem;
+   border:var(--border);
+}
+
+.form-container form h3{
+   text-transform: uppercase;
+   color:var(--black);
+   margin-bottom: 1rem;
+   font-size: 2.5rem;
+}
+
+.form-container form p{
+   font-size: 1.8rem;
+   color:var(--light-color);
+   margin-bottom: 1rem;
+   border-radius: .5rem;
+}
+
+.form-container form p span{
+   color:var(--orange);
+}
+
+.form-container form .box{
+   width: 100%;
+   margin:1rem 0;
+   border-radius: .5rem;
+   background-color: var(--light-bg);
+   padding:1.4rem;
+   font-size: 1.8rem;
+   color:var(--black);
+}
+
+
+
+#menu-btn{
+   display: none;
+}
+
+
+/* Sidebar styles */
+/* Sidebar Styling */
+.sidebar {
+   width: 250px; /* Fixed width */
+   position: fixed; /* Sidebar remains fixed */
+   top: 0; /* Align to top */
+   left: 0; /* Align to left */
+   height: 100vh; /* Full height */
+   background-color: #495057; /* Grayish background */
+   padding: 20px; /* Padding inside the sidebar */
+   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Shadow effect */
+   color: white; /* Text color */
+   display: flex;
+   flex-direction: column; /* Stack elements vertically */
+   justify-content: space-between; /* Space out items */
+   overflow: hidden; /* Prevent scrolling */
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+   display: flex;
+   flex-direction: column; /* Stack links vertically */
+}
+
+.sidebar-nav a {
+   padding: 12px 20px; /* Padding for links */
+   text-decoration: none; /* Remove underline */
+   color: white; /* Link color */
+   font-size: 18px; /* Increased font size */
+   font-weight: bold;
+   display: flex;
+   align-items: center; /* Align icons and text */
+   transition: background 0.3s ease-in-out; /* Smooth transition */
+   border-radius: 8px; /* Rounded corners */
+}
+
+.sidebar-nav a i {
+   margin-right: 10px; /* Space between icon and text */
+   font-size: 20px; /* Icon size */
+}
+
+.sidebar-nav a:hover {
+   background-color: #575757; /* Darker shade on hover */
+}
+.sidebar h1 {
+   font-size: 32px;
+   font-weight: bold;
+   text-align: center;
+   margin-bottom: 20px;
+   letter-spacing: 1.5px; /* Add spacing between letters */
+   color: #f8f9fa; /* Light color for better visibility */
+}
+
+/* Ensure the main content does not overlap */
+.card {
+   transition: 0.3s;
+   border: none;
+}
+.card:hover {
+   transform: scale(1.05);
+   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.icon {
+   font-size: 3rem;
+}
+#ordersChartContainer, #adminsUsersChartContainer, #productsChartContainer, #salesChartContainer {
+   height: 300px; /* Adjust the height of the graph container */
+}
+canvas {
+   max-height: 100%; /* Ensure the canvas fits within the container */
+}
+.main-content {
+   flex-grow: 1;
+   padding: 20px;
+   margin-left: 250px; /* Adjust for the fixed sidebar width */
+   overflow-y: auto;
+}
+
+
+.dashboard .box-container{
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
+   gap:1.5rem;
+   justify-content: center;
+   align-items: flex-start;
+}
+
+.dashboard .box-container .box{
+   padding:2rem;
+   text-align: center;
+   border:var(--border);
+   box-shadow: var(--box-shadow);
+   border-radius: .5rem;
+   background-color: var(--white);
+}
+
+.dashboard .box-container .box h3{
+   font-size: 2.7rem;
+   color:var(--black);
+}
+
+.dashboard .box-container .box h3 span{
+   font-size: 2rem;
+}
+
+.dashboard .box-container .box p{
+   padding:1.3rem;
+   border-radius: .5rem;
+   background-color: var(--light-bg);
+   font-size: 1.7rem;
+   color:var(--light-color);
+   margin:1rem 0;
+}
+
+.add-products form{
+   max-width: 70rem;
+   margin: 0 auto;   
+   background-color: var(--white);
+   box-shadow: var(--box-shadow);
+   border:var(--border);
+   border-radius: .5rem;
+   padding:2rem;
+}
+
+.add-products form .flex{
+   display: flex;
+   gap:1.5rem;
+   flex-wrap: wrap;
+}
+
+.add-products form .flex .inputBox{
+   flex:1 1 25rem;
+} 
+
+.add-products form span{
+   font-size:1.7rem;
+   color:var(--light-color);
+}
+
+.add-products form .box{
+   font-size: 1.8rem;
+   background-color: var(--light-bg);
+   border-radius: .5rem;
+   padding:1.4rem;
+   width: 100%;
+   margin-top: 1.5rem;
+}
+
+.add-products form textarea{
+   height: 5.4rem;
+   resize: none;
+}
+
+.show-products .box-container{
+   display: grid;
+   grid-template-columns: repeat(auto-fit, 33rem);
+   gap:1.5rem;
+   justify-content: center;
+   align-items: flex-start;
+}
+
+.show-products .box-container .box{
+   background-color: var(--white);
+   box-shadow: var(--box-shadow);
+   border-radius: .5rem;
+   border:var(--border);
+   padding:2rem;
+}
+
+.show-products .box-container .box img{
+   width: 100%;
+   height: 20rem;
+   object-fit: contain;
+   margin-bottom: 1.5rem;
+}
+
+.show-products .box-container .box .name{
+   font-size: 2rem;
+   color:var(--black);
+}
+
+.show-products .box-container .box .price{
+   font-size: 2rem;
+   color:var(--main-color);
+   margin:.5rem 0;
+}
+
+.show-products .box-container .box .details{
+   font-size: 1.5rem;
+   color:var(--light-color);
+   line-height: 2;
+}
+
+.update-product form{
+   background-color: var(--white);
+   box-shadow: var(--box-shadow);
+   border-radius: .5rem;
+   border:var(--border);
+   padding:2rem;
+   max-width: 50rem;
+   margin:0 auto;
+}
+
+.update-product form .image-container{
+   margin-bottom: 2rem;
+}
+
+.update-product form .image-container .main-image img{
+   height: 20rem;
+   width: 100%;
+   object-fit: contain;
+}
+
+.update-product form .image-container .sub-image{
+   display: flex;
+   gap:1rem;
+   justify-content: center;
+   margin:1rem 0;
+}
+
+.update-product form .image-container .sub-image img{
+   height: 5rem;
+   width: 7rem;
+   object-fit: contain;
+   padding:.5rem;
+   border:var(--border);
+   cursor: pointer;
+   transition: .2s linear;
+}
+
+.update-product form .image-container .sub-image img:hover{
+   transform: scale(1.1);
+}
+
+.update-product form .box{
+   width: 100%;
+   border-radius: .5rem;
+   padding:1.4rem;
+   font-size: 1.8rem;
+   color:var(--black);
+   background-color: var(--light-bg);
+   margin:1rem 0;
+}
+
+.update-product form span{
+   font-size: 1.7rem;
+   color:var(--light-color);
+}
+
+.update-product form textarea{
+   height: 15rem;
+   resize: none;
+}
+
+.orders .box-container{
+   display: grid;
+   grid-template-columns: repeat(auto-fit, 33rem);
+   gap:1.5rem;
+   align-items: flex-start;
+   justify-content: center;
+}
+
+.orders .box-container .box{
+   padding:2rem;
+   padding-top: 1rem;
+   border-radius: .5rem;
+   border:var(--border);
+   background-color: var(--white);
+   box-shadow: var(--box-shadow);
+}
+
+.orders .box-container .box p{
+   line-height: 1.5;
+   font-size: 2rem;
+   color:var(--light-color);
+   margin:1rem 0;
+}
+
+.orders .box-container .box p span{
+   color:var(--main-color);
+}
+
+.orders .box-container .select{
+   margin-bottom: .5rem;
+   width: 100%;
+   background-color: var(--light-bg);
+   padding:1rem;
+   font-size: 1.8rem;
+   color:var(--black);
+   border-radius: .5rem;
+   border:var(--border);
+}
+
+.accounts .box-container{
+   display: grid;
+   grid-template-columns: repeat(auto-fit, 33rem);
+   gap:1.5rem;
+   align-items: flex-start;
+   justify-content: center;
+}
+
+.accounts .box-container .box{
+   padding:2rem;
+   padding-top: .5rem;
+   border-radius: .5rem;
+   text-align: center;
+   border:var(--border);
+   background-color: var(--white);
+   box-shadow: var(--box-shadow);
+}
+
+.accounts .box-container .box p{
+   font-size: 2rem;
+   color:var(--light-color);
+   margin: 1rem 0;
+}
+
+.accounts .box-container .box p span{
+   color:var(--main-color);
+}
+
+.contacts .box-container{
+   display: grid;
+   grid-template-columns: repeat(auto-fit, 33rem);
+   gap:1.5rem;
+   align-items: flex-start;
+   justify-content: center;
+}
+
+.contacts .box-container .box{
+   padding:2rem;
+   padding-top: 1rem;
+   border-radius: .5rem;
+   border:var(--border);
+   background-color: var(--white);
+   box-shadow: var(--box-shadow);
+}
+
+.contacts .box-container .box p{
+   line-height: 1.5;
+   font-size: 2rem;
+   color:var(--light-color);
+   margin:1rem 0;
+}
+
+.contacts .box-container .box p span{
+   color:var(--main-color);
+}
+
+
+
+
+/* Logout button styles */
+.logout-btn {
+   
+   display: block; /* Make it a block element */
+   width: 100%; /* Full width */
+   margin-top: auto; /* Push it to the bottom of the sidebar */
+   padding: 10px; /* Padding for the button */
+   background-color: #e74c3c; /* Red background color */
+   color: #fff; /* White text color */
+   text-align: center; /* Center the text */
+   border-radius: 5px; /* Rounded corners */
+   text-decoration: none; /* Remove underline */
+   transition: background 0.3s; /* Transition for hover effect */
+}
+
+.logout-btn:hover {
+   background-color: #c0392b; /* Darker red on hover */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width:991px){
+
+   html{
+      font-size: 55%;
+   }
+
+}
+
+@media (max-width:768px){
+
+   #menu-btn{
+      display: inline-block;
+   }
+
+   
+
+}
+
+@media (max-width:450px){
+
+   html{
+      font-size: 50%;
+   }
+
+   .heading{
+      font-size: 3.5rem;
+   }
+
+   .flex-btn{
+      flex-flow: column;
+      gap:0;
+   }
+
+   .add-products form textarea{
+      height:15rem;
+   }   
+
+   .show-products .box-container{
+      grid-template-columns: 1fr;
+   }
+
+   .orders .box-container{
+      grid-template-columns: 1fr;
+   }
+
+   .accounts .box-container{
+      grid-template-columns: 1fr;
+   }
+
+   .contacts .box-container{
+      grid-template-columns: 1fr;
+   }
+
+}

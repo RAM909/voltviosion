@@ -1,0 +1,88 @@
+// =============================================
+//              Mixins                     
+// ============================================= 
+
+// BEM selectors
+@mixin elem($element) {
+    &__#{$element} {
+        @content;
+    }
+}
+
+@mixin modi($modifier) {
+    &--#{$modifier} {
+        @content;
+    }
+}
+
+// Create a flex container
+@mixin flexbox($disp: flex, $dir: null, $just: null, $align: null) {
+    display: $disp;
+    flex-direction: $dir;
+    justify-content: $just;
+    align-items: $align;
+}
+
+// Media queries
+@mixin mq($break) {
+    @if $break=="mobile" {
+        @media (min-width: $mobile) and (max-width: $tablet) {
+            @content;
+        }
+    }
+
+    @else if $break=="tablet" {
+        @media (min-width: $tablet + 1) {
+            @content;
+        }
+    }
+
+    @else if $break=="desktop" {
+        @media (max-width: $desktop) {
+            @content;
+        }
+    }
+
+    @else {
+        @error "'#{$break}' is not a vaild breakpoint name.";
+    }
+}
+
+// Calculate gird columns
+@mixin g-columns {
+    @for $i from 1 through $g-col-count {
+        &--#{$i} {
+            flex-basis: $i / $g-col-count * 100%;
+        }
+    }
+}
+
+// Generating :before or :after pseudo-element shapes
+@mixin p-el($el, $el-w: null, $el-h: null) {
+
+    @if $el=="before"or $el=="after" {
+        &:#{$el} {
+            @extend %pseudos;
+            width: $el-w;
+            height: $el-h;
+            @content;
+        }
+    }
+
+    @else {
+        @error "'#{$el}' is not a vaild pseude-element";
+    }
+}
+
+// Generate modifier background images 
+@mixin bg-imgs($map) {
+
+    @each $page,
+    $img in $map {
+        &--#{$page} {
+            background: $black url($img) no-repeat bottom;
+            background-size: cover;
+        }
+    }
+
+}

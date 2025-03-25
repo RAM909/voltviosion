@@ -1,0 +1,22 @@
+// =============================================
+//              Icons                     
+// ============================================= 
+
+// Icon
+.icn {
+
+    // Nav Toggle
+    @include modi(nav-toggle) {
+        @extend %icn--ui;
+        width: 25px;
+        height: 17px;
+        border-top: solid 3px $color-primary;
+        border-bottom: solid 3px $color-primary;
+        position: relative;
+
+        @include p-el(before, 25px, 3px) {
+            background: $color-primary;
+            top: 4px;
+        }
+    }
+}

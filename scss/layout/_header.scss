@@ -1,0 +1,26 @@
+// ============================================= 
+//              Header                           
+// ============================================= 
+
+.main-header {
+    background-color: $white;
+    z-index: 1000;
+    transition:
+        background-color $trns-duration ease-in-out,
+        color $trns-duration ease-in-out;
+
+    h1 {
+        margin: 0;
+    }
+
+    @include mq(tablet) {
+        position: fixed;
+        top: 0;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, .4);
+        width: 100%;
+
+        .row {
+            padding: 0;
+        }
+    }
+}

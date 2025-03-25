@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>voltvision</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/brands.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/solid.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    
+</head>
+
+<body>
+    <div class="wrap">
+        <header class="main-header">
+            <div class="container">
+                <div class="row">
+                    <div class="row__col--3">
+                        <h1>
+                            <a href="index.html">
+                                <img class="img__logo" src="img/logo.png" alt="VOLT Vision">
+                            </a>
+                        </h1>
+                    </div><!-- ./row__col--3 -->
+                    <div class="row__col--9">
+                        <nav role="navigation">
+                            <span id="toggle" class="icn--nav-toggle is-dispayed-mobile">
+                                <b class="srt">Toggle</b>
+                            </span>
+                            <ul class="nav is-collapsed-mobile">
+                                <li class="nav__link"><a href="index.html">Home</a></li>
+                                <li class="nav__link"><a href="about.html">About</a></li>
+                                <li class="nav__link"><a href="service.html">Services</a></li>
+                                <li class="nav__link--current"><a href="calculator.html">Calculators</a></li>
+                                <li class="nav__link"><a href="contact.html">Contact</a></li>
+                                <li class="nav__link"><a href="shop/home.php" target="_blank">Shop</a></li>
+                            </ul>
+                        </nav>
+                    </div><!-- ./row__col--9 -->
+                </div><!-- ./row -->
+            </div><!-- ./container -->
+        </header><!-- ./main-header -->
+
+        <div class="banner--service">
+            <div class="container">
+                <div class="row center-align">
+                    <div class="row__col--12">
+                        <h1 class="headline-primary">EV Charging Calculator</h1>
+                    </div><!-- ./row__col--12 -->
+                </div><!-- ./row -->
+            </div><!-- ./container -->
+        </div><!-- ./banner -->
+
+        <div class="container">
+            <div class="mt-5">
+                <h2></h2>
+            </div>
+            <div class="form-container">
+                <div class="form-group">
+                    <label for="chargerType">Charger Type:</label>
+                    <select id="chargerType" required>
+                        <option value="dc">DC Fast Charger</option>
+                        <option value="ac">AC Charger</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="batteryCapacity">Battery Capacity (kWh):</label>
+                    <input type="number" id="batteryCapacity" min="1" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="chargingSpeed">Charging Speed (kW):</label>
+                    <input type="number" id="chargingSpeed" min="1" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="currentCharge">Current State of Charge (%):</label>
+                    <input type="number" id="currentCharge" min="0" max="100" step="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="desiredCharge">Desired State of Charge (%):</label>
+                    <input type="number" id="desiredCharge" min="0" max="100" step="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="electricityCost">Electricity Cost (₹/kWh):</label>
+                    <input type="number" id="electricityCost" min="0" step="0.1" value="8" required>
+                </div>
+                <div class="form-group">
+                    <label for="chargeByTime">Charge By Time (HH:MM):</label>
+                    <input type="time" id="chargeByTime" required>
+                </div>
+            </div>
+            <button onclick="calculateCharging()"class="btn-submit">Calculate</button>
+            <div class="results">
+                <h2>Results</h2>
+                <p id="chargerTypeOutput">Charger Type: -</p>
+                <p id="hoursRequired">Hours Required: -</p>
+                <p id="totalCost">Charging Cost: ₹-</p>
+                <p id="plugInTime">Plug-in Time: -</p>
+            </div>
+        </div>
+
+        <script>
+            function calculateCharging() {
+                // Gather inputs
+                const chargerType = document.getElementById("chargerType").value;
+                const batteryCapacity = parseFloat(document.getElementById("batteryCapacity").value);
+                const chargingSpeed = parseFloat(document.getElementById("chargingSpeed").value);
+                const currentCharge = parseFloat(document.getElementById("currentCharge").value);
+                const desiredCharge = parseFloat(document.getElementById("desiredCharge").value);
+                const electricityCost = parseFloat(document.getElementById("electricityCost").value);
+                const chargeByTime = document.getElementById("chargeByTime").value;
+
+                // Validate inputs
+                if (isNaN(batteryCapacity) || isNaN(chargingSpeed) || isNaN(currentCharge) || isNaN(desiredCharge) || isNaN(electricityCost) || !chargeByTime) {
+                    alert("Please fill out all fields correctly.");
+                    return;
+                }
+
+                // Adjust speed based on charger type
+                const adjustedChargingSpeed = chargerType === "dc" ? chargingSpeed * 1.5 : chargingSpeed;
+
+                // Calculate required charge and time
+                const requiredChargeKWh = ((desiredCharge - currentCharge) / 100) * batteryCapacity;
+                const hoursRequired = requiredChargeKWh / adjustedChargingSpeed;
+
+                // Calculate charging cost
+                const totalCost = requiredChargeKWh * electricityCost;
+
+                // Calculate plug-in time
+                const [targetHour, targetMinute] = chargeByTime.split(":" ).map(Number);
+                const targetDate = new Date();
+                targetDate.setHours(targetHour, targetMinute, 0, 0);
+
+                const plugInTime = new Date(targetDate.getTime() - hoursRequired * 60 * 60 * 1000);
+
+                // Format results
+                const hoursRequiredFormatted = hoursRequired.toFixed(2);
+                const totalCostFormatted = totalCost.toFixed(2);
+                const plugInTimeFormatted = plugInTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                // Display results
+                document.getElementById("chargerTypeOutput").innerText = `Charger Type: ${chargerType === "dc" ? "DC Fast Charger" : "AC Charger"}`;
+                document.getElementById("hoursRequired").innerText = `Hours Required: ${hoursRequiredFormatted}`;
+                document.getElementById("totalCost").innerText = `Charging Cost: ₹${totalCostFormatted}`;
+                document.getElementById("plugInTime").innerText = `Plug-in Time: ${plugInTimeFormatted}`;
+            }
+        </script>
+
+        <footer class="main-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="row__col--4">
+                        <h3>Contact info</h3>
+                        <ul class="contact-info">
+                            <li>
+                                <p>
+                            <li class="fas fa-map-marker-alt"></li> Address: VCET VASAI
+                            </p>
+                            </li>
+                            <li>
+                                <p>
+                            <li class="fas fa-phone-alt"></li> TELEPHONE:+91-9998316913
+                            </p>
+                            </li>
+                            <li>
+                                <p>
+                            <li class="fas fa-envelope"></li> Email: <a href="mailto:info@voltavision.com">info@voltavision.com</a>
+                            </p>
+                            </li>
+                        </ul>
+                    </div><!-- ./row__col--4 -->
+                    <div class="row__col--4">
+                        <h3>Pages</h3>
+                        <ul class="pages">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="service.html">Services</a></li>
+                            <li><a href="calculator.html">Calculators</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="shop/home.php" target="_blank">Shop</a></li>
+                        </ul>
+                    </div><!-- ./row__col--4 -->
+                    <div class="row__col--4">
+                        <h3>Social</h3>
+                        <div class="social-icons">
+                            <a href="https://www.linkedin.com" target="_blank" class="fab fa-linkedin-in"></a>
+                            <a href="https://twitter.com" target="_blank" class="fab fa-twitter"></a>
+                            <a href="https://www.youtube.com" target="_blank" class="fab fa-youtube"></a>
+                            <a href="https://www.facebook.com" target="_blank" class="fab fa-facebook-square"></a>
+                            <a href="https://www.instagram.com" target="_blank" class="fab fa-instagram"></a>
+                        </div>
+                    </div><!-- ./row__col--4 -->
+                </div><!-- ./row -->
+            </div><!-- ./container -->
+
+            <div class="copy-right">
+                <p>&copy; 2024 All Rights Reserved | Volt Vision</p>
+            </div>
+        </footer><!-- ./main-footer -->
+
+        <script src="js/jquery-3.4.1.min.js"></script>
+        <script src="js/app.js"></script>
+    </div>
+</body>
+
+</html>

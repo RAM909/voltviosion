@@ -1,0 +1,60 @@
+// ============================================= 
+//              Slick Plugin                    
+// ============================================= 
+
+.slick-dots {
+    position: absolute;
+    width: 100%;
+    bottom: 2px;
+    left: 0;
+
+    @include mq(tablet) {
+        bottom: 20px;
+    }
+}
+
+.slick-dots li button:before {
+    font-size: 16px;
+    color: $white;
+}
+
+.slick-dots li.slick-active button:before {
+    color: $white;
+}
+
+
+.slick-track {
+    @include flexbox($align: center);
+}
+
+.slick-prev {
+    left: 10px;
+    z-index: 999;
+}
+
+.slick-next {
+    right: 35px;
+    z-index: 999;
+}
+
+.slick-prev::before,
+.slick-next::before {
+    color: $white;
+    background-color: $black;
+    font-size: 30px;
+    opacity: .5;
+}
+
+.slick-prev::before {
+    content: '\2329';
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 0.5em;
+}
+
+.slick-next::before {
+    content: '\232A';
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 0.5em;
+}

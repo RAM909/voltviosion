@@ -1,0 +1,77 @@
+// ============================================= 
+//              Extends                           
+// ============================================= 
+
+// Navbar
+%nav-item-horz {
+    @include mq(tablet) {
+        margin: 0 em(2px);
+    }
+}
+
+%nav-item-link {
+    text-align: center;
+    display: block;
+    padding: em(8px) 0;
+    width: 100%;
+    color: $black;
+    border-bottom: 2px solid transparent;
+    transition: color $trns-duration ease-in-out;
+
+    @include mq(mobile) {
+        border-bottom-color: palette(grey);
+        padding-top: em(14px);
+        padding-bottom: em(14px);
+    }
+}
+
+%nav-item-on {
+    border-bottom-color: $color-primary;
+    text-decoration: none;
+
+    @include mq(mobile) {
+        border-bottom-color: $color-primary;
+    }
+}
+
+// Headlines
+%hdln-prim {
+    font-weight: $font-weight--bold;
+    font-size: em(42px);
+    line-height: (46px / 42px);
+}
+
+%hdln-seco {
+    font-size: em(24px);
+    text-transform: uppercase;
+    letter-spacing: $letter-space;
+    color: $black;
+    // margin-bottom: em(30px);
+}
+
+// Image
+%img-disp {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+// Icons
+%icn--ui {
+    line-height: 0;
+    cursor: pointer;
+}
+
+// Buttons
+%btn {
+    width: 100%;
+    padding: em(12px) em(32px);
+    color: $white;
+    font-weight: $font-weight--reqular;
+    cursor: pointer;
+    border: none;
+    border-radius: em(20px);
+    text-transform: uppercase;
+    transition: background-color $trns-duration ease-in-out,
+        color $trns-duration ease-in-out;
+}

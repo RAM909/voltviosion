@@ -1,0 +1,35 @@
+// ============================================= 
+//              Images                           
+// ============================================= 
+
+.img {
+
+    @include elem(logo) {
+        @extend %img-disp;
+        width: 300px;
+
+        @include mq(tablet) {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+
+    @include elem(sponsor) {
+        @extend %img-disp;
+        max-height: em(40px);
+    }
+
+    @include elem(radius) {
+        @extend %img-disp;
+        border-radius: $br--default;
+        margin-bottom: em(20px);
+        background-color: $black;
+    }
+
+    @include elem(card) {
+        @extend %img-disp;
+        max-width: calc(100% + 3em);
+        margin-left: -1.5em;
+        background-color: $black;
+    }
+}

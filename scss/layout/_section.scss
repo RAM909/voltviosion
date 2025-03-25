@@ -1,0 +1,52 @@
+// ============================================= 
+//              Sections                     
+// ============================================= 
+
+.primary {
+    text-align: center;
+    padding: 0;
+
+    .far,
+    .fas {
+        font-size: em(36px);
+        margin-bottom: 25px;
+    }
+
+    .headline-secondary {
+        font-size: em(21px);
+    }
+
+    p {
+        font-size: em(16px);
+    }
+}
+
+.sponsors {
+    background-color: $white;
+}
+
+.secondary {
+
+    h2 {
+        margin-top: 0;
+    }
+
+    p {
+        font-size: em(20px);
+    }
+
+    img {
+        margin-bottom: em(30px);
+    }
+
+    li {
+        list-style-type: circle;
+    }
+
+    .card {
+        background: $white;
+        padding: 0 1.5em 1em;
+        box-shadow: 0 1px 0 0 rgba(0, 0, 0, .1);
+    }
+
+}

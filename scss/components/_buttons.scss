@@ -1,0 +1,23 @@
+// ============================================= 
+//              Buttons                       
+// ============================================= 
+
+.btn {
+    &-default {
+        @extend %btn;
+        background-color: $color-primary-light;
+
+        &:hover {
+            background-color: $color-primary;
+        }
+    }
+
+    &-submit {
+        @extend %btn;
+        background-color: $color-secondary;
+
+        &:hover {
+            background-color: $color-secondary-dark;
+        }
+    }
+}

@@ -1,0 +1,50 @@
+// ============================================= 
+//              Footer                           
+// ============================================= 
+
+.main-footer {
+    color: $white;
+    padding: em(32px) 0;
+    background-color: $color-primary;
+
+    h3 {
+        margin-bottom: em(20px);
+    }
+
+    a {
+        color: $white;
+    }
+
+    .contact-info {
+
+        p {
+            margin: 0 0 em(10px);
+        }
+
+    }
+
+    .pages {
+        a:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .social-icons {
+
+        a:hover {
+            opacity: 0.7;
+        }
+
+        .fab {
+            font-size: em(32px);
+            padding-right: em(7px);
+            padding-bottom: em(16px);
+        }
+    }
+
+    .copy-right {
+        border-top: 2px solid $white;
+        text-align: center;
+        margin-top: em(30px);
+    }
+}

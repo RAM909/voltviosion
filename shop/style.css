@@ -1,0 +1,68 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+    line-height: 1.5;
+    background-color: #eceeef;
+}
+
+/* Flexbox for Layout */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -0.625em; /* Adjust for padding */
+}
+
+.row__col--3, .row__col--4, .row__col--5, .row__col--6, .row__col--7, .row__col--12 {
+    padding: 0 0.625em; /* Adjust for padding */
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column; /* Stack columns on smaller screens */
+    }
+
+    .row__col--3, .row__col--4, .row__col--5, .row__col--6, .row__col--7, .row__col--12 {
+        flex-basis: 100%; /* Full width on small screens */
+    }
+
+    .swiper-slide {
+        width: 100%; /* Full width for slides on small screens */
+    }
+
+    .home-products .swiper-slide {
+        flex-basis: 100%; /* Full width for product slides */
+    }
+
+    .header .flex .navbar {
+        flex-direction: column; /* Stack navbar items */
+    }
+
+    .header .flex .navbar a {
+        margin: 1rem 0; /* Space between navbar items */
+    }
+}
+
+@media (max-width: 450px) {
+    .heading {
+        font-size: 2rem; /* Adjust heading size */
+    }
+
+    .btn {
+        font-size: 1rem; /* Adjust button size */
+    }
+}
+
+/* Responsive Images */
+img {
+    max-width: 100%; /* Ensure images are responsive */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Additional styles for swiper */
+.swiper {
+    width: 100%;
+    height: auto; /* Allow height to adjust based on content */
+}
+

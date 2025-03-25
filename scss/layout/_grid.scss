@@ -1,0 +1,35 @@
+// ============================================= 
+//              Grid System                      
+// ============================================= 
+
+.container {
+    padding: 0 5%;
+    @extend .centered;
+
+    @include mq(tablet) {
+        max-width: $max-width;
+    }
+}
+
+.row {
+    @include flexbox($dir: column);
+    padding: 1em em(10px);
+
+    @include elem(col) {
+        @include g-columns;
+    }
+
+    @include mq(tablet) {
+        @include flexbox($dir: row, $just: space-between);
+        flex-wrap: wrap;
+    }
+}
+
+[class^="row__col--"] {
+    margin-top: em(10px);
+    padding: em(10px);
+
+    @include mq(tablet) {
+        margin-top: 0;
+    }
+}
