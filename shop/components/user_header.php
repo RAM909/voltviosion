@@ -9,6 +9,9 @@
          ';
       }
    }
+
+   // Make sure user_id is validated for database operations
+   $user_id = validate_user_id($user_id);
 ?>
 
 <header class="header">

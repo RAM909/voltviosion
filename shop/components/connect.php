@@ -55,4 +55,26 @@ function db_prepare($query) {
     global $conn;
     return $conn->prepare(convertToPostgres($query));
 }
+
+// Function to ensure user_id is valid for database operations
+function validate_user_id($user_id) {
+    global $is_postgres;
+    
+    // For PostgreSQL, we need to convert empty strings to NULL
+    if ($is_postgres && ($user_id === '' || $user_id === null)) {
+        return null;
+    }
+    
+    // For MySQL, empty strings will be converted to 0
+    return $user_id;
+}
+
+// Fix user_id in session if needed
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (isset($_SESSION['user_id'])) {
+    $_SESSION['user_id'] = validate_user_id($_SESSION['user_id']);
+}
 ?>

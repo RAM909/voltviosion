@@ -2,13 +2,17 @@
 
 include 'components/connect.php';
 
-session_start();
+// Session is already started in connect.php
+// session_start();
 
 if(isset($_SESSION['user_id'])){
    $user_id = $_SESSION['user_id'];
 }else{
    $user_id = '';
 };
+
+// Validate user_id for database operations
+$user_id = validate_user_id($user_id);
 
 include 'components/wishlist_cart.php';
 
