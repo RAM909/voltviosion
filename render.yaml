@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: voltvision
+    env: docker
+    region: oregon
+    plan: free
+    branch: main
+    healthCheckPath: /
+    envVars:
+      - key: RENDER
+        value: true
+      - key: DB_HOST
+        fromDatabase:
+          name: voltvision-db
+          property: host
+      - key: DB_NAME
+        fromDatabase:
+          name: voltvision-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: voltvision-db
+          property: user
+      - key: DB_PASS
+        fromDatabase:
+          name: voltvision-db
+          property: password
+    dockerfilePath: Dockerfile
+
+databases:
+  - name: voltvision-db
+    region: oregon
+    plan: free
