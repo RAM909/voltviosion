@@ -9,9 +9,11 @@ $db_pass = getenv('DB_PASS') ?: '';
 if (getenv('RENDER')) {
     // PostgreSQL connection
     $db_string = "pgsql:host=$db_host;dbname=$db_name";
+    $is_postgres = true;
 } else {
     // MySQL connection (for local development)
     $db_string = "mysql:host=$db_host;dbname=$db_name";
+    $is_postgres = false;
 }
 
 try {
@@ -19,5 +21,38 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Connection failed: " . $e->getMessage());
+}
+
+// Function to convert MySQL style queries to PostgreSQL style
+function convertToPostgres($query) {
+    global $is_postgres;
+    
+    if (!$is_postgres) {
+        return $query; // Return original query if not using Postgres
+    }
+    
+    // Replace backticks with double quotes for table/column names
+    $query = str_replace('`', '"', $query);
+    
+    // MySQL uses LIMIT x, y but PostgreSQL uses LIMIT x OFFSET y
+    if (preg_match('/LIMIT\s+(\d+)\s*,\s*(\d+)/i', $query, $matches)) {
+        $offset = $matches[1];
+        $limit = $matches[2];
+        $query = preg_replace('/LIMIT\s+(\d+)\s*,\s*(\d+)/i', "LIMIT $limit OFFSET $offset", $query);
+    }
+    
+    // Handle CURRENT_TIMESTAMP for PostgreSQL
+    $query = str_replace('CURRENT_TIMESTAMP()', 'CURRENT_TIMESTAMP', $query);
+    
+    // Handle any AUTO_INCREMENT references (PostgreSQL uses SERIAL)
+    $query = preg_replace('/AUTO_INCREMENT/i', '', $query);
+    
+    return $query;
+}
+
+// Create a wrapper for PDO prepare that automatically converts queries
+function db_prepare($query) {
+    global $conn;
+    return $conn->prepare(convertToPostgres($query));
 }
 ?>

@@ -11,6 +11,10 @@ sleep 10
 echo "Initializing the database..."
 PGPASSWORD=$DB_PASS psql -h $DB_HOST -U $DB_USER -d $DB_NAME -f /var/www/html/shop/shop_db_pg.sql || true
 
+# Run the query conversion tool
+echo "Running PHP conversion tool..."
+cd /var/www/html && php update_queries.php || true
+
 # Exit successfully
 echo "Deployment completed successfully!"
 exit 0 
